@@ -1,0 +1,15 @@
+h5.truncar-1l {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wrapper {
+  min-height: 100vh;
+}
+
+body {
+  min-width: 320px;
+}
