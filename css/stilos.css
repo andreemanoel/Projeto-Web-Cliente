@@ -13,3 +13,11 @@ h5.truncar-1l {
 body {
   min-width: 320px;
 }
+
+.title_categorias {
+  position: absolute;
+  font-size: 22px;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 20px 0 0 20px;
+}
