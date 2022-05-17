@@ -2,7 +2,7 @@
   "name": "projeto-web-cliente",
   "version": "1.0.0",
   "description": "",
-  "main": "'which http-server -c-1'",
+  "main": "/usr/local/bin/http-server",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
