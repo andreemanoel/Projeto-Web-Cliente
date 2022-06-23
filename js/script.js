@@ -10,7 +10,9 @@ const loadClassEvent = (className, type, callback) => {
 
 const loadIdEvent = (idName, type, callback) => {
     var element = document.getElementById(idName);
-    element.addEventListener(type, callback, false);
+    if(element){
+        element.addEventListener(type, callback, false);
+    }
 }
 
 window.onload = function(){ 
@@ -28,6 +30,34 @@ window.onload = function(){
         }else {
             errPassword.style.display = 'none';
             verifyPassword = true;
+        }
+    })
+
+    loadIdEvent('txtCEP', 'input', function(e) {
+        var xhr = new XMLHttpRequest();
+        if(this.value.length >= 8){
+            try {
+                xhr.open("GET", `https://viacep.com.br/ws/${this.value}/json`, true);
+
+                xhr.onload = function (e) {
+                    if (xhr.readyState === 4) {
+                      if (xhr.status === 200) {
+                        let data = JSON.parse(xhr.response);
+
+                        if(data.erro != "true") {
+                            Formulario.setEnderecoEndDisabled(data);
+                        }else {
+                            Formulario.setEndereco({});
+                        }
+                      }
+                    }
+                  };
+                  xhr.send(null);
+                } catch (e) {
+                console.log(e);
+            }
+        }else {
+            Formulario.setEndereco({});
         }
     })
 
@@ -59,8 +89,8 @@ window.onload = function(){
         }
     });
 
-    loadClassEvent('btn-danger', 'click', (e) => {
-        let validate = Formulario.validate(['txtNome', 'txtDateNascimento', 'txtCPF', 'txtEmail', 'txtPassword', 'txtCEP', 'txtCidade', 'txtBairro', 'txtRua', 'txtNumero']);
+    loadClassEvent('enviar-form', 'click', (e) => {
+        let validate = Formulario.validate(['txtNome', 'txtUf', 'txtDateNascimento', 'txtCPF', 'txtEmail', 'txtPassword', 'txtCEP', 'txtCidade', 'txtBairro', 'txtRua', 'txtNumero']);
         let valueCpf = document.getElementById('txtCPF').value;
         let errCpf = document.getElementById('errorCPF');
         let errData = document.getElementById('errorData');

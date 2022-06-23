@@ -26,7 +26,7 @@ window.onload = function(){
         }
     })
 
-    loadClassEvent('btn-danger', 'click', (e) => {
+    loadClassEvent('enviar-form', 'click', (e) => {
         let validate = Formulario.validate(['txtNome', 'txtEmail', 'txtMsg','assunto']);
         let success = document.getElementById('success');
 
