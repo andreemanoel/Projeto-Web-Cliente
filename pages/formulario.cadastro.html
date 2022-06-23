@@ -81,10 +81,16 @@
                                 <div class="form-floating mb-3">
                                     <input class="form-control" type="email" id="txtEmail" required placeholder=" " />
                                     <label for="txtEmail">Email *</label>
+                                    <div class="alert alert-danger" id="errorEmail" role="alert" style="display: none;">
+                                        Favor digitar um e-mail válido
+                                    </div>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" type="password" id="txtPassword" required placeholder=" "/>
                                     <label for="txtPassword">Senha *</label>
+                                    <div class="alert alert-danger" id="errorPassword" role="alert" style="display: none;">
+                                        Favor digitar mínimo 8 caracteres
+                                    </div>
                                 </div>
                             </fieldset>
                         </div>
@@ -120,6 +126,9 @@
                         <label class="form-check-label" for="flexCheckDefault">
                             Desejo receber informações sobre promoções.
                         </label>
+                    </div>
+                    <div class="alert alert-success" role="alert" style="display: none;" id="success">
+                        Dados enviado com sucesso!
                     </div>
                     <div class="mb-3 text-left">
                         <button type="button" class="btn btn-outline-danger">Cancelar</button>

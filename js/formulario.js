@@ -20,6 +20,11 @@ const onlyNumberInput = (id_element) => {
   })
 }
 
+const validateEmail = (email) => {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
 const calcularIdade = (data_nascimento) => {
   var nascimento = data_nascimento.split('-');
   nascimento[1] = String(parseInt(nascimento[1]) - 1);
@@ -65,5 +70,6 @@ export default {
   validate,
   onlyNumberInput,
   verifyCpf,
-  calcularIdade
+  calcularIdade,
+  validateEmail
 };

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/stilos.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <script src="./js/bootstrap.min.js"></script>
-
+    <script type="module" src="../js/formulario.js"></script>
     <title>E-commerce - Só carrão</title>
 </head>
 <body>
@@ -58,15 +58,18 @@
                 <form class="mt-3">
                     <div class="col-sm-12 col-md-6">
                         <div class="mb-3">
-                            <label class="form-label" for="txtNome">Nome</label>
+                            <label class="form-label" for="txtNome">Nome *</label>
                             <input class="form-control" type="text" id="txtNome" placeholder="Zezinho da Silva Cleverson de Oliveira" autofocus />
                         </div>
                         <div class=" mb-3">
-                            <label class="form-label" for="txtEmail">Email</label>
+                            <label class="form-label" for="txtEmail">Email *</label>
                             <input class="form-control" type="email" id="txtEmail" placeholder="zezinho.da.silva.cleverson.de.oliveira@bol.com.br" />
+                            <div class="alert alert-danger" id="errorEmail" role="alert" style="display: none;">
+                                Favor digitar um e-mail válido
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="assunto">Assunto (sugestões, reclamação, elogios, etc)</label>
+                            <label class="form-label" for="assunto">Assunto (sugestões, reclamação, elogios, etc) *</label>
                             <select class="form-select form-select-lg mb-3" name="assunto" id="assunto">
                                 <option value="">---- Selecione ----</option>
                                 <option value="s">Sugestões</option>
@@ -75,11 +78,14 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="txtMsg" class="form-label">Mensagem</label>
+                            <label for="txtMsg" class="form-label">Mensagem *</label>
                             <textarea class="form-control" id="txtMsg" rows="3"></textarea>
                         </div>
                     </div>
                     <hr />
+                    <div class="alert alert-success" role="alert" style="display: none;" id="success">
+                        Dados enviado com sucesso!
+                    </div>
                     <div class="mb-3 text-left">
                         <button type="button" class="btn btn-outline-danger">Cancelar</button>
                         <button type="button" class="btn btn-danger">Enviar</button>
@@ -113,6 +119,22 @@
                     <button id="enviar" type="submit"> Enviar </button>
                 </form>
             </div> -->
+            <div class="modal" tabindex="-1" role="dialog" id="myModal">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Alerta</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p>Favor preencher os campos obrigatórios</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar_modal">Fechar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
         </main>
     
         <footer class="border-top text-muted bg-light">
@@ -128,5 +150,6 @@
             </div>
         </footer>
     </div>
+    <script type="module" src="../js/script2.js"></script>
 </body>
 </html>

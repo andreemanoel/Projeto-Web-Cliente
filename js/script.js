@@ -8,9 +8,39 @@ const loadClassEvent = (className, type, callback) => {
     }
 }
 
+const loadIdEvent = (idName, type, callback) => {
+    var element = document.getElementById(idName);
+    element.addEventListener(type, callback, false);
+}
+
 window.onload = function(){ 
     Formulario.onlyNumberInput('txtCEP');
     Formulario.onlyNumberInput('txtCPF');
+
+    var verifyPassword;
+    var verifyEmail;
+
+    loadIdEvent('txtPassword', 'input', function(e) {
+        let errPassword = document.getElementById('errorPassword');
+        if(this.value.length < 8) {
+            errPassword.style.display = 'block';
+            verifyPassword = false;
+        }else {
+            errPassword.style.display = 'none';
+            verifyPassword = true;
+        }
+    })
+
+    loadIdEvent('txtEmail', 'input', function(e) {
+        console.log(this.value)
+        let errorEmail = document.getElementById('errorEmail');
+        verifyEmail = Formulario.validateEmail(this.value);
+        if(!verifyEmail) {
+            errorEmail.style.display = 'block';
+        }else {
+            errorEmail.style.display = 'none';
+        }
+    })
 
     loadClassEvent('add-car', 'click', (e) => {
         let newCar = e.srcElement.dataset;
@@ -30,11 +60,12 @@ window.onload = function(){
     });
 
     loadClassEvent('btn-danger', 'click', (e) => {
-        var validate = Formulario.validate(['txtNome', 'txtDateNascimento', 'txtCPF', 'txtEmail', 'txtPassword', 'txtCEP', 'txtCidade', 'txtBairro', 'txtRua', 'txtNumero']);
-        var valueCpf = document.getElementById('txtCPF').value;
+        let validate = Formulario.validate(['txtNome', 'txtDateNascimento', 'txtCPF', 'txtEmail', 'txtPassword', 'txtCEP', 'txtCidade', 'txtBairro', 'txtRua', 'txtNumero']);
+        let valueCpf = document.getElementById('txtCPF').value;
         let errCpf = document.getElementById('errorCPF');
         let errData = document.getElementById('errorData');
         let data_nascimento = document.getElementById('txtDateNascimento').value;
+        let success = document.getElementById('success');
 
         let verifyData = Formulario.calcularIdade(data_nascimento);
 
@@ -60,7 +91,21 @@ window.onload = function(){
             errCpf.style.display = 'none';
         }
 
-        !validate || !verify || !verifyData ? console.log('nao pode enviar') : console.log('envioooo');
+        if(!validate || !verify || !verifyData || !verifyPassword || !verifyEmail) {
+            console.log('nao pode enviar')
+        }else {
+            document.getElementById('txtNome').value = '';
+            document.getElementById('txtDateNascimento').value = '';
+            document.getElementById('txtEmail').value = '';
+            document.getElementById('txtCPF').value = '';
+            document.getElementById('txtPassword').value = '';
+            document.getElementById('txtCEP').value = '';
+            document.getElementById('txtCidade').value = '';
+            document.getElementById('txtBairro').value = '';
+            document.getElementById('txtRua').value = '';
+            document.getElementById('txtNumero').value = '';
+            success.style.display = 'block';
+        }
 
     });
 }
