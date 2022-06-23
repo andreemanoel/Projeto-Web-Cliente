@@ -81,10 +81,13 @@ window.onload = function(){
                 exists = true;    
             }
         }
+
         if(!exists){
             Carrinho.addCar({
                 name: newCar.name,
-                valor: newCar.price
+                valor: newCar.price,
+                img: e.path[2].children[0].children[0].src,
+                qtd: 1,
             });
         }
     });

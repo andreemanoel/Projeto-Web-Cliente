@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/stilos.css">
   <link rel="stylesheet" href="../css/bootstrap.css">
+  <script type="module" src="../js/carrinho.js"></script>
   <script src="./js/bootstrap.min.js"></script>
 
   <title>E-commerce - Só carrão</title>
@@ -54,97 +55,7 @@
   <main class="flex-fill">
     <div class="container">
         <h1>Carrinho de Compras</h1>
-        <ul class="list-group mb-3">
-            <li class="list-group-item py-3">
-                <div class="row g-3">
-                    <div class="col-4 col-md-3 col-lg-2">
-                        <a href="#">
-                            <img src="../img/carro_1.jpg" class="img-thumbnail">
-                        </a>
-                    </div>
-                    <div class="col-8 col-md-9 col-lg-7 col-xl-8 text-left align-self-center">
-                        <h4>
-                            <b><a href="#" class="text-decoration-none text-danger">
-                              Lamborghini Huracán</a></b>
-                        </h4>
-                    </div>
-                    <div
-                        class="col-6 offset-6 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-3 offset-lg-0 col-xl-2 align-self-center mt-3">
-                        <div class="input-group">
-                            <button class="btn btn-outline-dark btn-sm" type="button">
-                                -
-                            </button>
-                            <input type="text" class="form-control text-center border-dark" disabled value="1">
-                            <button class="btn btn-outline-dark btn-sm" type="button">
-                                +
-                            </button>
-                        </div>
-                        <div class="text-end mt-2">
-                            <span class="text-dark">Valor: R$ 80.000,00</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item py-3">
-                <div class="row g-3">
-                    <div class="col-4 col-md-3 col-lg-2">
-                        <a href="#">
-                            <img src="../img/carro_4.jpg" class="img-thumbnail">
-                        </a>
-                    </div>
-                    <div class="col-8 col-md-9 col-lg-7 col-xl-8 text-left align-self-center">
-                        <h4>
-                            <b><a href="#" class="text-decoration-none text-danger">
-                              Opala</a></b>
-                        </h4>
-                    </div>
-                    <div
-                        class="col-6 offset-6 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-3 offset-lg-0 col-xl-2 align-self-center mt-3">
-                        <div class="input-group">
-                          <button class="btn btn-outline-dark btn-sm" type="button">
-                              -
-                          </button>
-                          <input type="text" class="form-control text-center border-dark" disabled value="1">
-                          <button class="btn btn-outline-dark btn-sm" type="button">
-                              +
-                          </button>
-                      </div>
-                        <div class="text-end mt-2">
-                            <span class="text-dark">Valor: R$ 13.000,00</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item py-3">
-                <div class="row g-3">
-                    <div class="col-4 col-md-3 col-lg-2">
-                        <a href="#">
-                            <img src="../img/carro_6.jpg" class="img-thumbnail">
-                        </a>
-                    </div>
-                    <div class="col-8 col-md-9 col-lg-7 col-xl-8 text-left align-self-center">
-                        <h4>
-                            <b><a href="#" class="text-decoration-none text-danger">
-                                    AParati Surf 99</a></b>
-                        </h4>
-                    </div>
-                    <div
-                        class="col-6 offset-6 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-3 offset-lg-0 col-xl-2 align-self-center mt-3">
-                        <div class="input-group">
-                          <button class="btn btn-outline-dark btn-sm" type="button">
-                              -
-                          </button>
-                          <input type="text" class="form-control text-center border-dark" disabled value="1">
-                          <button class="btn btn-outline-dark btn-sm" type="button">
-                              +
-                          </button>
-                      </div>
-                        <div class="text-end mt-2">
-                            <span class="text-dark">Valor: R$ 15.000,00</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
+        <ul class="list-group mb-3" id="contentCarros">
             <li class="list-group-item py-3">
                 <div class="text-end">
                     <h4 class="text-dark mb-3">
@@ -173,5 +84,9 @@
     </div>
   </footer>
   </div>
+  <script type="module">
+    import  Carrinho from '../js/carrinho.js';
+    Carrinho.renderCarrinho();
+  </script>
 </body>
 </html>
