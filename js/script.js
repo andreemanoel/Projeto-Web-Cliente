@@ -22,11 +22,14 @@ const cupomDesconto = (idName) => {
         btn.addEventListener('click', function() {
             let valorTotalParcial = (document.getElementById('contentTotal').innerHTML).replace(/[^0-9,]*/g, '').replace(',', '.');
             let txtCupom = document.getElementById('txtCupom').value;
-            if(txtCupom.toUpperCase() == 'UTFPR15'){
+
+            if(txtCupom.toUpperCase() == 'UTFPR'){
                 let total = valorTotalParcial * 0.85;
                 console.log(valorTotalParcial, total)
+
                 document.getElementById('contentTotal').innerHTML = `Valor Total: <s>${parseFloat(valorTotalParcial).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</s>`;
                 let valorDesconto = document.getElementById('contentDesconto');
+                
                 valorDesconto.innerHTML = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
                 valorDesconto.style.display = 'block'
                 btn.disabled = true;
@@ -44,6 +47,48 @@ window.onload = function(){
 
     var verifyPassword;
     var verifyEmail;
+
+    loadIdEvent('fecharCompra', 'click', function(e) {
+        let token = localStorage.getItem('token');
+        let users = JSON.parse(localStorage.getItem('users'));
+
+        let modal = document.getElementById("modalLoginForm");
+
+        loadIdEvent('fechar', 'click', function(){
+            modal.style.display = 'none';
+        });
+
+        if(!token){
+            let modal = document.getElementById("modalLoginForm");
+            modal.style.display = 'Block';
+
+            
+            loadIdEvent('login', 'click', function(){
+                let email = document.getElementById('loginEmail').value;
+                let senha = document.getElementById('loginSenha').value;
+
+                if(users){
+                    for(let user of users){
+                        if(user.email == email && user.password == senha){
+                            localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9');
+                            modal.style.display = 'none';
+                        }
+                    }
+                }
+            });
+        }else {
+            let sucess = document.getElementById('sucessoCompra');
+            sucess.style.display = 'block';
+            let node = document.querySelectorAll('.carros');
+            for(let el of node){
+                el.remove()
+            }
+            localStorage.setItem('carros', JSON.stringify([]));
+            document.getElementById('contentTotal').innerHTML = `Valor Total: R$ 0,00`;
+            document.getElementById('txtCupom').value = '';
+            Carrinho.resetValorTotal();
+        }
+    })
 
     loadIdEvent('txtPassword', 'input', function(e) {
         let errPassword = document.getElementById('errorPassword');
@@ -155,6 +200,10 @@ window.onload = function(){
         if(!validate || !verify || !verifyData || !verifyPassword || !verifyEmail) {
             console.log('nao pode enviar')
         }else {
+            Formulario.addUser({
+                email: document.getElementById('txtEmail').value,
+                password: document.getElementById('txtPassword').value
+            });
             document.getElementById('txtNome').value = '';
             document.getElementById('txtDateNascimento').value = '';
             document.getElementById('txtEmail').value = '';
@@ -167,6 +216,7 @@ window.onload = function(){
             document.getElementById('txtNumero').value = '';
             Formulario.setEndereco({});
             success.style.display = 'block';
+
         }
 
     });

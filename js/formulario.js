@@ -1,3 +1,22 @@
+const getusers = () => {
+  if(localStorage.getItem('users') == null ){
+      localStorage.setItem('users', JSON.stringify([]))
+  }
+
+  return JSON.parse(localStorage.getItem('users'));
+}
+
+const addUser = (user) => {   
+  if(localStorage.getItem('users') == null ){
+      localStorage.setItem('users', JSON.stringify([]))
+  }
+  if(user != null){
+      let users = JSON.parse(localStorage.getItem('users'));
+      users.push(user);
+      localStorage.setItem('users', JSON.stringify(users))
+  }
+};
+
 const validate = (elements) => {
   for(let el of elements){
     if(['', null, undefined].includes(document.getElementById(el).value.trim())){
@@ -160,5 +179,7 @@ export default {
   validateEmail,
   converterEstados,
   setEndereco,
-  setEnderecoEndDisabled
+  setEnderecoEndDisabled,
+  getusers,
+  addUser,
 };

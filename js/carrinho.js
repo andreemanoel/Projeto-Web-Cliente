@@ -24,7 +24,7 @@ const renderCarrinho = () => {
     for(let car of carros){
         total += parseFloat(car.valor.replace(/[^0-9,]*/g, '').replace(',', '.'));
         html += `
-        <li class="list-group-item py-3">
+        <li class="list-group-item py-3 carros">
             <div class="row g-3">
                 <div class="col-4 col-md-3 col-lg-2">
                     <a href="#">
