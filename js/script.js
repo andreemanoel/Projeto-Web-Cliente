@@ -15,7 +15,30 @@ const loadIdEvent = (idName, type, callback) => {
     }
 }
 
+const cupomDesconto = (idName) => {
+    let btn = document.getElementById(idName);
+
+    if(btn){
+        btn.addEventListener('click', function() {
+            let valorTotalParcial = (document.getElementById('contentTotal').innerHTML).replace(/[^0-9,]*/g, '').replace(',', '.');
+            let txtCupom = document.getElementById('txtCupom').value;
+            if(txtCupom.toUpperCase() == 'UTFPR15'){
+                let total = valorTotalParcial * 0.85;
+                console.log(valorTotalParcial, total)
+                document.getElementById('contentTotal').innerHTML = `Valor Total: <s>${parseFloat(valorTotalParcial).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</s>`;
+                let valorDesconto = document.getElementById('contentDesconto');
+                valorDesconto.innerHTML = total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+                valorDesconto.style.display = 'block'
+                btn.disabled = true;
+            }
+        })
+    }
+}
+
+
 window.onload = function(){ 
+    cupomDesconto('btnCupom');
+
     Formulario.onlyNumberInput('txtCEP');
     Formulario.onlyNumberInput('txtCPF');
 
@@ -31,6 +54,10 @@ window.onload = function(){
             errPassword.style.display = 'none';
             verifyPassword = true;
         }
+    })
+
+    loadIdEvent('txtCupom', 'input', function(){
+        Carrinho.resetValorTotal();
     })
 
     loadIdEvent('txtCEP', 'input', function(e) {
@@ -84,6 +111,7 @@ window.onload = function(){
 
         if(!exists){
             Carrinho.addCar({
+                id: newCar.id,
                 name: newCar.name,
                 valor: newCar.price,
                 img: e.path[2].children[0].children[0].src,
@@ -137,6 +165,7 @@ window.onload = function(){
             document.getElementById('txtBairro').value = '';
             document.getElementById('txtRua').value = '';
             document.getElementById('txtNumero').value = '';
+            Formulario.setEndereco({});
             success.style.display = 'block';
         }
 

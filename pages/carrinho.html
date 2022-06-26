@@ -58,9 +58,16 @@
         <ul class="list-group mb-3" id="contentCarros">
             <li class="list-group-item py-3">
                 <div class="text-end">
-                    <h4 class="text-dark mb-3">
-                        Valor Total: R$ 108.000,00
+                    <h4 class="text-dark mb-3" id="contentTotal">
+                        Valor Total: R$ 0.000,00
                     </h4>
+                    <h4 class="text-dark mb-3" id="contentDesconto" style="display: none;">
+                        R$ 0.000,00
+                    </h4>
+                    <div>
+                        <button type="button" class="btn btn-success" id="btnCupom">Aplicar Cupom</button>
+                        <input type="text" id="txtCupom" class="text-dark mb-3" style="text-transform: uppercase">
+                    </div>
                     <a href="../pages/modelos.html" class="btn btn-outline-success btn-lg">
                         Continuar Comprando                            
                     </a>
@@ -88,5 +95,6 @@
     import  Carrinho from '../js/carrinho.js';
     Carrinho.renderCarrinho();
   </script>
+  <script type="module" src="../js/script.js"></script>
 </body>
 </html>
