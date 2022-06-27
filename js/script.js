@@ -9,6 +9,27 @@ const loadClassEvent = (className, type, callback) => {
     }
 }
 
+const createAddCar = (e) => {
+    let newCar = e.srcElement.dataset;
+        let cars   = Carrinho.getCars();
+        let exists = false;
+        for(let car of cars){
+            if(car.name == newCar.name){
+                exists = true;    
+            }
+        }
+
+        if(!exists){
+            Carrinho.addCar({
+                id: newCar.id,
+                name: newCar.name,
+                valor: newCar.price,
+                img: e.path[2].children[0].children[0].src,
+                qtd: 1,
+            });
+        }
+}
+
 const createDetails = (e) => {
     let element = e.srcElement.parentNode.parentNode;
         let data = element.getElementsByClassName('d-block')[0].dataset;
@@ -94,6 +115,9 @@ window.onload = function(){
             }
             loadClassEvent('detalhes', 'click', (e) => {
                 createDetails(e);
+            });
+            loadClassEvent('add-car', 'click', (e) => {
+                createAddCar(e);
             });
         });
     }
@@ -201,24 +225,7 @@ window.onload = function(){
     })
 
     loadClassEvent('add-car', 'click', (e) => {
-        let newCar = e.srcElement.dataset;
-        let cars   = Carrinho.getCars();
-        let exists = false;
-        for(let car of cars){
-            if(car.name == newCar.name){
-                exists = true;    
-            }
-        }
-
-        if(!exists){
-            Carrinho.addCar({
-                id: newCar.id,
-                name: newCar.name,
-                valor: newCar.price,
-                img: e.path[2].children[0].children[0].src,
-                qtd: 1,
-            });
-        }
+        createAddCar(e);
     });
 
     loadClassEvent('detalhes', 'click', (e) => {
