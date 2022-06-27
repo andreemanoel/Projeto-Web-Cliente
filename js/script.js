@@ -9,6 +9,42 @@ const loadClassEvent = (className, type, callback) => {
     }
 }
 
+const createDetails = (e) => {
+    let element = e.srcElement.parentNode.parentNode;
+        let data = element.getElementsByClassName('d-block')[0].dataset;
+
+        let modal = document.getElementById('modalDetalhes');
+        modal.style.display = 'block'
+
+        modal.getElementsByClassName('content-detalhes')[0].innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">${data.name}</h5>
+                </div>
+                <a href="#">
+                    <img width="300" height="200" src="../img/carro_${data.id}.jpg" class="card-img-top">
+                </a>
+                <div class="modal-body">
+                    <p>${data.description}</p>
+                </div>
+                <div class="card-header">
+                    <p>R$${(data.price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}))}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fechar</button>
+                </div>
+            </div>
+        `
+
+        let close = modal.querySelector('.btn-secondary');
+
+        if(close){
+            close.addEventListener('click', function(){
+                modal.style.display = 'none'
+            })
+        }
+}
+
 const loadIdEvent = (idName, type, callback) => {
     var element = document.getElementById(idName);
     if(element){
@@ -56,6 +92,9 @@ window.onload = function(){
             }else if(selecionada.value == '3'){
                 Modelos.renderAlfabetica('maior');
             }
+            loadClassEvent('detalhes', 'click', (e) => {
+                createDetails(e);
+            });
         });
     }
 
@@ -183,40 +222,7 @@ window.onload = function(){
     });
 
     loadClassEvent('detalhes', 'click', (e) => {
-        let element = e.srcElement.parentNode.parentNode;
-        let data = element.getElementsByClassName('d-block')[0].dataset;
-
-        let modal = document.getElementById('modalDetalhes');
-        modal.style.display = 'block'
-
-        modal.getElementsByClassName('content-detalhes')[0].innerHTML = `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">${data.name}</h5>
-                </div>
-                <a href="#">
-                    <img width="300" height="200" src="../img/carro_${data.id}.jpg" class="card-img-top">
-                </a>
-                <div class="modal-body">
-                    <p>${data.description}</p>
-                </div>
-                <div class="card-header">
-                    <p>R$${(data.price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}))}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fechar</button>
-                </div>
-            </div>
-        `
-
-        let close = modal.querySelector('.btn-secondary');
-
-        if(close){
-            close.addEventListener('click', function(){
-                modal.style.display = 'none'
-            })
-        }
-
+        createDetails(e);
     });
 
     loadClassEvent('enviar-form', 'click', (e) => {
