@@ -27,6 +27,13 @@ const createAddCar = (e) => {
                 img: e.path[2].children[0].children[0].src,
                 qtd: 1,
             });
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Adicionado ao carrinho!',
+                showConfirmButton: false,
+                timer: 1000
+            })
         }
 }
 
