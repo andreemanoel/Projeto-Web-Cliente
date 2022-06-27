@@ -20,20 +20,24 @@ const createAddCar = (e) => {
         }
 
         if(!exists){
-            Carrinho.addCar({
-                id: newCar.id,
-                name: newCar.name,
-                valor: newCar.price,
-                img: e.path[2].children[0].children[0].src,
-                qtd: 1,
-            });
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Adicionado ao carrinho!',
-                showConfirmButton: false,
-                timer: 1000
-            })
+            if(newCar){
+                Carrinho.addCar({
+                    id: newCar.id,
+                    name: newCar.name,
+                    valor: newCar.price,
+                    img: e.path[2].children[0].children[0].src,
+                    qtd: 1,
+                });
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    width: '300px',
+                    heigth: '70px',
+                    title: 'Adicionado ao carrinho!',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            }
         }
 }
 
