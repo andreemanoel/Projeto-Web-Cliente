@@ -32,7 +32,6 @@ const createAddCar = (e) => {
                     position: 'center',
                     icon: 'success',
                     width: '300px',
-                    height: '70px',
                     title: 'Adicionado ao carrinho!',
                     showConfirmButton: false,
                     timer: 1000
