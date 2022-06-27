@@ -1,4 +1,5 @@
 import  Carrinho from './carrinho.js';
+import  Modelos from './modelos.js';
 import  Formulario from './formulario.js';
 
 const loadClassEvent = (className, type, callback) => {
@@ -41,6 +42,22 @@ const cupomDesconto = (idName) => {
 
 window.onload = function(){ 
     cupomDesconto('btnCupom');
+
+    Modelos.setAllcars();
+    Modelos.renderAlfabetica('nome')
+    let select = document.querySelector('select');
+    if(select){
+        select.addEventListener('change', function () {
+            var selecionada = this.options[this.selectedIndex];
+            if(selecionada.value == '1'){
+                Modelos.renderAlfabetica('nome');
+            }else if(selecionada.value == '2'){
+                Modelos.renderAlfabetica('menor');
+            }else if(selecionada.value == '3'){
+                Modelos.renderAlfabetica('maior');
+            }
+        });
+    }
 
     Formulario.onlyNumberInput('txtCEP');
     Formulario.onlyNumberInput('txtCPF');
@@ -163,6 +180,43 @@ window.onload = function(){
                 qtd: 1,
             });
         }
+    });
+
+    loadClassEvent('detalhes', 'click', (e) => {
+        let element = e.srcElement.parentNode.parentNode;
+        let data = element.getElementsByClassName('d-block')[0].dataset;
+
+        let modal = document.getElementById('modalDetalhes');
+        modal.style.display = 'block'
+
+        modal.getElementsByClassName('content-detalhes')[0].innerHTML = `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">${data.name}</h5>
+                </div>
+                <a href="#">
+                    <img width="300" height="200" src="../img/carro_${data.id}.jpg" class="card-img-top">
+                </a>
+                <div class="modal-body">
+                    <p>${data.description}</p>
+                </div>
+                <div class="card-header">
+                    <p>R$${(data.price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}))}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">fechar</button>
+                </div>
+            </div>
+        `
+
+        let close = modal.querySelector('.btn-secondary');
+
+        if(close){
+            close.addEventListener('click', function(){
+                modal.style.display = 'none'
+            })
+        }
+
     });
 
     loadClassEvent('enviar-form', 'click', (e) => {
